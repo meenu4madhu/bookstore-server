@@ -5,6 +5,7 @@ const userController = require('../controllers/userController')
 const bookController = require('../controllers/bookController')
 const jwtMiddleware = require('../middlewares/jwtMiddleware')
 const multerMiddleware = require('../middlewares/multerMiddleware')
+const adminMiddleware = require('../middlewares/adminMiddleware')
 // create router object
 const router = new express.Router()
 
@@ -33,7 +34,7 @@ router.get('/books/all',jwtMiddleware,bookController.getUserAllBookPageControlle
 router.get('/user-books/all',jwtMiddleware,bookController.getUserUploadedBookProfilePageBookController)
 
 // get all user bought book pages
-router.get('/user-books/all',jwtMiddleware,bookController.getUserUploadedBookProfilePageBookController)
+router.get('/user-books/bought',jwtMiddleware,bookController.getUserBoughtBookProfilePageBookController)
 // get single- view book details
 router.get('/books/:id/view',jwtMiddleware,bookController.viewBookController)
 // edit user profile 
@@ -42,4 +43,18 @@ router.get('/books/:id/view',jwtMiddleware,bookController.viewBookController)
 router.put('/user/:id/edit',jwtMiddleware,multerMiddleware.single('picture'),userController.updateUserProfileController)
 
 
+// Delete book
+router.delete('/books/:id',jwtMiddleware,bookController.deleteBookController)
+
+// make payment
+router.put('/books/:id/buy',jwtMiddleware,bookController.bookPaymentController)
+
+// ........................authorised user...................... 
+// get all book details-admin
+router.get('/admin-books/all',adminMiddleware,bookController.getAllBooksController)
+
+// get all user details - admin
+router.get('/admin-users/all',adminMiddleware,userController.getAllUsersController)
+// update book status
+router.put('/books/:id/update',adminMiddleware,jwtMiddleware,bookController.UpdateBookStatusController)
 module.exports=router

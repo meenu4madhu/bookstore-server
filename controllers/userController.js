@@ -119,3 +119,25 @@ res.status(500).json(error)
     
 }
 // admin edit profile
+// get all users : admin-login
+
+exports.getAllUsersController = async (req,res)=>{
+    console.log("Inside getAllUsersController");
+    
+    
+    
+   try{
+        // get all users from db 
+        const allUsers = await users.find({ role: { $ne: "admin" } })
+        res.status(200).json(allUsers)
+       
+    }catch(error){
+        console.log(error);
+        res.status(500).json(error)
+        
+    }
+    
+    
+   
+  
+}
