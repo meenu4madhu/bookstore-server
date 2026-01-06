@@ -245,8 +245,8 @@ console.log("Inside bookPaymentController");
   
   line_items,
   mode: 'payment',
-  success_url: 'http://localhost:5173/user/payment-success',
-  cancel_url:'http://localhost:5173/user/payment-error',
+  success_url: 'https://book-store-xi-sage.vercel.app/user/payment-success',
+  cancel_url:'https://book-store-xi-sage.vercel.app/user/payment-error',
   payment_method_types:["card"]
   
   }); 
